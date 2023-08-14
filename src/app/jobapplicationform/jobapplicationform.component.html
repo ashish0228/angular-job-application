@@ -1,0 +1,292 @@
+<h1 style="text-align: center;">Job Application Form</h1>
+
+<form [formGroup]="jobApplicationForm" (ngSubmit)="saveApplication()">
+
+    <div class="container">
+      <div id="first" style="margin-left: 20px;">
+        <h4 class="w_100">Basic Details</h4>
+        <div class="form-control">
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Name <span>*</span></mat-label>
+                <input matInput placeholder="Enter Name" formControlName="name">
+            </mat-form-field>
+            <div style="color: red;">
+                <span *ngIf="submit && jobApplicationForm.controls['name'].errors?.['required']">
+                    Please Enter Name!
+                </span>
+            </div>
+        </div>
+        <div class="form-control">
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Email <span>*</span></mat-label>
+                <input matInput placeholder="Enter Email" formControlName="email">
+            </mat-form-field>
+
+            <div style="color: red;">
+                <span *ngIf="submit && jobApplicationForm.controls['email'].errors?.['required']">
+                    Please Enter Email!
+                </span>
+                <span *ngIf="submit && jobApplicationForm.controls['email'].errors?.['email']">
+                    Please Enter Valid Email!
+                </span>
+            </div>
+        </div>
+        <div class="form-control">
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Address <span>*</span></mat-label>
+                <textarea matInput placeholder="Enter Address" formControlName="address"></textarea>
+            </mat-form-field>
+
+
+            <div style="color: red;">
+                <span *ngIf="submit && jobApplicationForm.controls['address'].errors?.['required']">
+                    Please Enter Address!
+                </span>
+            </div>
+        </div>
+
+        <div class="form-control">
+            <label>Gender</label>
+            <mat-radio-group aria-label="Select an option" formControlName="gender" required style="margin-left: 10px;">
+                <mat-radio-button value="male">Male</mat-radio-button>
+                <mat-radio-button value="female" style="margin-left: 10px;">Female</mat-radio-button>
+                <mat-error style="margin-top: 20px;" *ngIf="submit && jobApplicationForm.controls['gender'].errors?.['required']">Please select Gender</mat-error>
+            </mat-radio-group>
+        </div>
+
+        <div class="form-control">
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Contact Number <span>*</span></mat-label>
+                <input matInput placeholder="Enter Contact Number" formControlName="contactNumber">
+            </mat-form-field>
+
+            <div style="color: red;">
+                <span *ngIf="submit && jobApplicationForm.controls['contactNumber'].errors?.['required']">
+                    Please Enter Contact Number!
+                </span>
+                <span *ngIf="submit && jobApplicationForm.controls['contactNumber'].errors?.['pattern']">
+                    Please Enter Valid Contact Number!
+                </span>
+            </div>
+        </div>
+      </div>
+
+      <div id="first">
+          <h4>School Education details</h4>
+          <div>
+              <div class="form-control">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                      <mat-label>SSC Percentage</mat-label>
+                      <input matInput placeholder="Enter SSC Percentage" formControlName="sscMarks">
+                  </mat-form-field>
+              </div>
+              <div class="form-control">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                      <mat-label>SSC Board Name</mat-label>
+                      <input matInput placeholder="Enter SSC Board Name" formControlName="sscBoard">
+                  </mat-form-field>
+              </div>
+          </div>
+
+          <div>
+              <div class="form-control">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                      <mat-label>HSC Percentage</mat-label>
+                      <input matInput placeholder="Enter HSC Percentage" formControlName="hscMarks">
+                  </mat-form-field>
+              </div>
+              <div class="form-control">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                      <mat-label>HSC Board Name</mat-label>
+                      <input matInput placeholder="Enter HSC Board Name" formControlName="hscBoard">
+                  </mat-form-field>
+              </div>
+          </div>
+          </div>
+          <div id="first">
+            <h4>College Education details</h4>
+
+          <div>
+              <div class="form-control">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                      <mat-label>Graduation CGPA</mat-label>
+                      <input matInput placeholder="Enter Graduation CGPA" formControlName="graduationCGPA">
+                  </mat-form-field>
+              </div>
+              <div>
+                  <mat-form-field class="example-full-width" appearance="fill">
+                      <mat-label>Graduation University</mat-label>
+                      <input matInput placeholder="Enter Graduation University Name" formControlName="graduationUniversity" >
+                  </mat-form-field>
+              </div>
+          </div>
+
+          <div>
+            <div class="form-control">
+              <mat-form-field class="example-full-width" appearance="fill">
+                  <mat-label>Master Degree CGPA</mat-label>
+                  <input matInput placeholder="Enter Master Degreee CGPA" formControlName="masterDegreeCGPA" >
+              </mat-form-field>
+            </div>
+
+            <div class="form-control">
+              <mat-form-field class="example-full-width" appearance="fill">
+                  <mat-label>Master Degree University</mat-label>
+                  <input matInput placeholder="Enter Master University Name" formControlName="masterDegreeUniversity" >
+              </mat-form-field>
+              </div>
+          </div>
+      </div>
+
+      <div id="first">
+          <div>
+              <h4 class="w_100">Work Experience</h4>
+              <button type="button" mat-stroked-button color="primary" (click)="addWorkExperience()">Add More Experience</button>
+          </div>
+          <div *ngFor="let w of workExperience; let i = index">
+              <div class="form-control">
+              <h3>Experience {{ i + 1}}</h3>
+              <div>
+                  <mat-form-field class="example-full-width" appearance="fill">
+                      <mat-label>Company Name</mat-label>
+                      <input matInput placeholder="Enter Company Name" [(ngModel)]="workExperience[i].companyName" [ngModelOptions]="{standalone: true}" >
+                  </mat-form-field>
+              </div>
+              <div>
+                  <mat-form-field class="example-full-width" appearance="fill">
+                      <mat-label>Designation Name</mat-label>
+                      <input matInput placeholder="Enter Company Name" [(ngModel)]="workExperience[i].designation" [ngModelOptions]="{standalone: true}">
+                  </mat-form-field>
+              </div>
+              <div>
+                  <mat-form-field>
+                      <mat-label>Select Start and End Date</mat-label>
+                      <mat-date-range-input [rangePicker]="picker">
+                        <input matStartDate placeholder="Start date" [(ngModel)]="workExperience[i].startDate" [ngModelOptions]="{standalone: true}">
+                        <input matEndDate placeholder="End date" [(ngModel)]="workExperience[i].endDate" [ngModelOptions]="{standalone: true}">
+                      </mat-date-range-input>
+                      <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+                      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-date-range-picker #picker></mat-date-range-picker>
+                    </mat-form-field>
+              </div>
+              <button type="button" mat-raised-button color="warn" *ngIf="i !== 0" (click)="removeWorkExpp(i)">Remove WorkExperience</button>
+              </div>
+          </div>
+      </div>
+
+      <div id="first">
+        <h3 class="w_100">Known Languages</h3>
+        <div>
+            <div *ngFor="let lan of language; let i = index">
+              <div>
+                <mat-checkbox class="example-margin"
+                [checked]="!lan.languageSelected"
+                (change)="languageSelected($event, i)"
+                [color]="'primary'" >{{lan.langulageName}}</mat-checkbox>
+
+                  <div>
+                      <mat-checkbox class="example-margin"
+                      (change)="selectLanguageOption($event, i, 'read')"
+                      [color]="'primary'"
+                      [checked]="lan.read"
+                      [disabled]="lan.languageSelected">Read</mat-checkbox>
+                      <mat-checkbox class="example-margin"
+                      (change)="selectLanguageOption($event, i, 'write')"
+                      [color]="'primary'"
+                      [checked]="lan.write"
+                      [disabled]="lan.languageSelected">Write</mat-checkbox>
+
+                      <mat-checkbox class="example-margin"
+                      (change)="selectLanguageOption($event, i, 'speak')"
+                      [color]="'primary'"
+                      [checked]="lan.speak"
+                      [disabled]="lan.languageSelected">speak</mat-checkbox>
+                  </div>
+              </div>
+            </div>
+        </div>
+
+        <div id="main">
+          <h3 class="w_100"> Technical Experience </h3>
+          <div>
+              <div class="form-control">
+                  <mat-form-field>
+                      <mat-label>Select Technology Leval <span>*</span></mat-label>
+                      <mat-select formControlName="technialExperiance">
+                        <mat-option *ngFor="let web of technologyLeval" value="{{web.value}}">
+                          {{web.name}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+              </div>
+
+          </div>
+        </div>
+
+        <div class="main">
+          <div>
+              <mat-form-field class="example-full-width" appearance="fill">
+                  <mat-label>Technical Description</mat-label>
+                  <input matInput placeholder="Enter technical details" formControlName="technicalDetails" >
+              </mat-form-field>
+          </div>
+        </div>
+
+        <h3>Preference</h3>
+        <div class="main">
+          <div>
+              <mat-form-field class="example-full-width" appearance="fill">
+                  <mat-label>Prefered Location <span>*</span></mat-label>
+                  <mat-select formControlName="preferredLocation">
+                    <mat-option *ngFor="let location of locationName" value="{{location.value}}">
+                      {{location.name}}
+                    </mat-option>
+                  </mat-select>
+              </mat-form-field>
+          </div>
+        </div>
+
+        <div class="main">
+          <div>
+              <mat-form-field class="example-full-width" appearance="fill">
+                  <mat-label>ExpectedCTC in Lakh<span>*</span></mat-label>
+                  <input matInput placeholder="Enter ExpectedCTC" formControlName="expectedCTC" >
+              </mat-form-field>
+          </div>
+      </div>
+
+      <div class="main">
+          <div>
+              <mat-form-field class="example-full-width" appearance="fill">
+                  <mat-label>CurrentCTC in Lakh</mat-label>
+                  <input matInput placeholder="Enter CurrentCTC" formControlName="currentCTC" >
+              </mat-form-field>
+          </div>
+      </div>
+
+      <div class="main">
+          <div>
+              <mat-form-field class="example-full-width" appearance="fill">
+                  <mat-label>NoticePeriod in Month</mat-label>
+                  <input matInput placeholder="Enter NoticePeriod" formControlName="noticePeriod" >
+              </mat-form-field>
+          </div>
+      </div>
+
+      <div>
+        <button type="submit" mat-raised-button color="primary">Submit Application</button>
+        <button type="button" mat-raised-button color="warn" style="margin-left: 20px;">Reset</button>
+      </div>
+
+      </div>
+
+  </div>
+
+
+
+
+
+
+
+</form>

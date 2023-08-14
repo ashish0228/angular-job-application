@@ -1,0 +1,22 @@
+<div class="login">
+    <h5>Login</h5>
+    <form class="example-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div>
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>User Name</mat-label>
+                <input matInput placeholder="Enter your name" formControlName="userName" >
+
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Password</mat-label>
+                <input matInput placeholder="Enter your password" formControlName="password" type="password" >
+            </mat-form-field>
+        </div>
+        <div>
+        <button mat-raised-button color="primary">Submit</button>
+        <button mat-raised-button color="warn" type="button" style="margin-left: 20px;" (click)="resetForm()">Reset</button>
+        </div>
+    </form>
+</div>

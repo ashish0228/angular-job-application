@@ -1,0 +1,25 @@
+<mat-toolbar color="primary">
+    <div fxHide.gt-xs>
+        <!-- (click)="onToggleSidenav()" -->
+        <!-- <button mat-icon-button>
+            <mat-icon>menu</mat-icon>
+        </button> -->
+    </div>
+    <div>
+        <!-- <a routerLink="/home">Admin Login</a>  -->
+        <button *ngIf="!loginLogout" mat-icon-button [routerLink]="['/login']">Login</button>
+        <button *ngIf="loginLogout" mat-icon-button (click)="logOut()">Logout</button>
+
+    </div>
+    <div fxFlex fxLayout fxLayoutAlign="end" fxHide.xs>
+        <button [routerLink]="['/jobapplication']" mat-icon-button style="margin-left: 20px;">Apply For Job</button>
+
+        <button class="dashboard-menu" [routerLink]="['/dashboard']" *ngIf="loginLogout" mat-icon-button >Dashboard</button>
+
+        <!-- <ul fxLayout fxLayoutGap="15px" class="navigation-items">
+            <li>
+                <a routerLink="/owner">Apply For Job</a>
+            </li>
+        </ul> -->
+    </div>
+  </mat-toolbar>
